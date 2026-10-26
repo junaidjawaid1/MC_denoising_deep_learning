@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# data, checkpoints and outputs
+*.npy
+*.bin
+*.pth
+*.pt
+runs/
+results/
+wandb/
+slurm-*.out

@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "Deep learning for fast Monte-Carlo proton dose denoising"
+authors:
+  - family-names: Jawaid
+    given-names: Junaid
+  - family-names: Spezialetti
+    given-names: Matteo
+  - family-names: Stilo
+    given-names: Giovanni
+  - family-names: Mignosi
+    given-names: Filippo
+  - family-names: Langiu
+    given-names: Alessio
+  - family-names: Schwarz
+    given-names: Marco
+license: MIT
+preferred-citation:
+  type: article
+  title: "Deep learning for fast Monte-Carlo proton dose denoising"
+  authors:
+    - family-names: Jawaid
+      given-names: Junaid
+    - family-names: Spezialetti
+      given-names: Matteo
+    - family-names: Stilo
+      given-names: Giovanni
+    - family-names: Mignosi
+      given-names: Filippo
+    - family-names: Langiu
+      given-names: Alessio
+    - family-names: Schwarz
+      given-names: Marco
+  year: 2026
+  # TODO: add journal, volume and DOI once published

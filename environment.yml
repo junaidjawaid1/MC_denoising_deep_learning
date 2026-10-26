@@ -1,0 +1,9 @@
+name: proton-dose-denoising
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu118
+      - -r requirements.txt

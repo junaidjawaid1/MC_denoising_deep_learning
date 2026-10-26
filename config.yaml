@@ -1,0 +1,48 @@
+# Configuration for the 2 mm isotropic dataset (256 x 32 x 256 voxels, field of view 512 x 64 x 512 mm).
+data:
+  root: null                # directory containing train/, validation/ and test/ (or pass --data-root)
+  voxel_size_mm: 2.0
+  input_shape: [256, 32, 256]   # [D, H, W]; each dimension must be a multiple of 8
+
+training:
+  epochs: 150
+  batch_size: 2             # one training step peaks at ~58 GB (A100 80 GB)
+  val_batch_size: 2
+  num_workers: 4
+  learning_rate: 1.0e-5
+  lr_factor: 0.7            # ReduceLROnPlateau on the validation GPR
+  lr_patience: 10
+  min_learning_rate: 1.0e-6
+  seed: null                # the paper's runs were not seeded; set an integer for repeatable runs
+
+loss:
+  dose_percent: 2.0         # gamma criterion used in the loss: 2% / 2 mm, global
+  dta_mm: 2.0
+  dose_cutoff: 0.2          # 20% lower dose cutoff
+  max_gamma: 10.0
+  wmse_alpha: 1.0
+  wmse_weight: 1.0
+  gamma_weight: 1.0
+  ema_momentum: 0.99
+
+beta_schedule:              # stepped once per epoch
+  beta_start: 0.1
+  beta_mid: 2.0
+  beta_end: 5.0
+  warmup_epochs: 10
+  phase1_end: 50
+  phase2_end: 100
+  update_interval: 5
+
+evaluation:
+  criteria:                 # [dose %, DTA mm]
+    - [1.0, 1.0]
+    - [2.0, 2.0]
+  directions: [direct, reverse]
+  dose_cutoff: 0.2
+  history_ratio: 1.0        # 5e3-history doses are stored already multiplied by 200
+  abs_mask_fraction: 0.1    # Eq. 12 sums over voxels where the prediction is >= 10% of its max
+  max_gamma: 2.0            # only bounds the PyMedPhys search; does not change the passing rate
+  interp_fraction: 10
+  ram_available_gb: 20      # memory PyMedPhys may use per gamma computation
+  num_workers: 8
